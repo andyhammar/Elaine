@@ -1,0 +1,27 @@
+Senaste nytt
+http://sydsvenskan.se/rss/senastenytt
+
+Sport
+http://sydsvenskan.se/rss/sport
+
+Malmö
+http://sydsvenskan.se/rss/malmo
+
+Lund
+http://sydsvenskan.se/rss/lund
+
+Skåne
+http://sydsvenskan.se/rss/skane
+
+Opinion
+http://sydsvenskan.se/rss/opinion
+
+Bloggar:
+
+Anja Gatus blogg
+
+feed://w2.sydsvenskan.se/gatu/feed/
+
+Kulturbloggen
+
+feed://w2.sydsvenskan.se/blogg/index.php/feed/
