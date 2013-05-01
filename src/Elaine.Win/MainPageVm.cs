@@ -19,8 +19,8 @@ namespace Elaine.Win
         public async Task Init()
         {
             await GetFeedAsync("http://sydsvenskan.se/rss/senastenytt");
-   
         }
+
         private async Task GetFeedAsync(string feedUriString)
         {
             // using Windows.Web.Syndication;

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-  <Identity Name="21411AndreasHammar.SydsvenskanFlip" Publisher="CN=FA18167A-309D-4036-BC20-56EAF537BC91" Version="1.0.0.0" />
+  <Identity Name="21411AndreasHammar.SydsvenskanFlip" Publisher="CN=FA18167A-309D-4036-BC20-56EAF537BC91" Version="1.0.0.1" />
   <Properties>
     <DisplayName>Sydsvenskan Flip</DisplayName>
     <PublisherDisplayName>Andreas Hammar</PublisherDisplayName>
@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Elaine.Win.App">
       <VisualElements DisplayName="Sydsvenskan Flip" Logo="Assets\logo-150.png" SmallLogo="Assets\logo-30.png" Description="Läs senaste nytt från Sydsvenskan" ForegroundText="dark" BackgroundColor="#FFFFFF">
-        <DefaultTile ShowName="allLogos" />
+        <DefaultTile ShowName="noLogos" />
         <SplashScreen Image="Assets\splash.png" BackgroundColor="#FFFFFF" />
         <InitialRotationPreference>
           <Rotation Preference="portrait" />

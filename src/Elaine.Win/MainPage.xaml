@@ -1,13 +1,15 @@
-﻿<Page
+﻿<common:LayoutAwarePage
     x:Class="Elaine.Win.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Elaine.Win"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:common="using:Elaine.Win.Common"
     mc:Ignorable="d"
     d:DataContext="{d:DesignInstance Type=local:MainPageVmDesign, IsDesignTimeCreatable=true}">
-	<Page.Resources>
+	<common:LayoutAwarePage.Resources>
+		<common:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
 		<DataTemplate x:Key="DataTemplate1">
 			<Grid>
 				<Grid.RowDefinitions>
@@ -34,9 +36,54 @@
 				<Image Grid.Column="1" Source="{Binding ImageUri}" Grid.Row="1"/>
 			</Grid>
 		</DataTemplate>
-	</Page.Resources>
+		</common:LayoutAwarePage.Resources>
 
-    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate1}"/>
+    <Grid x:Name="grid" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <FlipView x:Name="flipView" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate1}">
+        </FlipView>
+        <Image x:Name="image" Source="Assets/Sydsvenskan_L.jpg" Visibility="Collapsed"/>
+        <Border x:Name="busyBorder" BorderBrush="Black" BorderThickness="1" Background="White">
+        	<TextBlock TextWrapping="Wrap" Text="Hämtar nyheter..." Style="{StaticResource PageHeaderTextStyle}" Foreground="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Border>
+
+        <VisualStateManager.VisualStateGroups>
+
+            <!-- Visual states reflect the application's view state -->
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="FullScreenLandscape"/>
+                <VisualState x:Name="Filled"/>
+
+                <!-- The entire page respects the narrower 100-pixel margin convention for portrait -->
+                <VisualState x:Name="FullScreenPortrait">
+                </VisualState>
+
+                <!-- The back button and title have different styles when snapped -->
+                <VisualState x:Name="Snapped">
+                	<Storyboard>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="flipView">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Collapsed</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="image">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<Visibility>Visible</Visibility>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background)" Storyboard.TargetName="grid">
+                			<DiscreteObjectKeyFrame KeyTime="0">
+                				<DiscreteObjectKeyFrame.Value>
+                					<SolidColorBrush Color="White"/>
+                				</DiscreteObjectKeyFrame.Value>
+                			</DiscreteObjectKeyFrame>
+                		</ObjectAnimationUsingKeyFrames>
+                	</Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
-</Page>
+</common:LayoutAwarePage>
