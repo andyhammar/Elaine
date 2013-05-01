@@ -1,39 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
-
-  <Identity Name="e7ab5f27-56f2-4ccb-b6aa-2b7cae92cf3e"
-            Publisher="CN=Andreas"
-            Version="1.0.0.0" />
-
+  <Identity Name="21411AndreasHammar.SydsvenskanFlip" Publisher="CN=FA18167A-309D-4036-BC20-56EAF537BC91" Version="1.0.0.0" />
   <Properties>
-    <DisplayName>Elaine.Win</DisplayName>
-    <PublisherDisplayName>Andreas</PublisherDisplayName>
+    <DisplayName>Sydsvenskan Flip</DisplayName>
+    <PublisherDisplayName>Andreas Hammar</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
-
   <Prerequisites>
     <OSMinVersion>6.2.1</OSMinVersion>
     <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
   </Prerequisites>
-
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
-
   <Applications>
-    <Application Id="App"
-        Executable="$targetnametoken$.exe"
-        EntryPoint="Elaine.Win.App">
-        <VisualElements
-            DisplayName="Elaine.Win"
-            Logo="Assets\Logo.png"
-            SmallLogo="Assets\SmallLogo.png"
-            Description="Elaine.Win"
-            ForegroundText="light"
-            BackgroundColor="#464646">
-            <DefaultTile ShowName="allLogos" />
-            <SplashScreen Image="Assets\SplashScreen.png" />
-        </VisualElements>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Elaine.Win.App">
+      <VisualElements DisplayName="Sydsvenskan Flip" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Läs senaste nytt från Sydsvenskan" ForegroundText="light" BackgroundColor="#464646">
+        <DefaultTile ShowName="allLogos" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+        <InitialRotationPreference>
+          <Rotation Preference="portrait" />
+          <Rotation Preference="landscape" />
+        </InitialRotationPreference>
+      </VisualElements>
     </Application>
   </Applications>
   <Capabilities>
