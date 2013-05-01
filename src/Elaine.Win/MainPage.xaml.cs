@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,6 +29,7 @@ namespace Elaine.Win
         public MainPage()
         {
             this.InitializeComponent();
+            NewsItems = new ObservableCollection<FeedItem>();
             DataContext = this;
         }
 
@@ -57,15 +59,15 @@ namespace Elaine.Win
                     FeedItem feedItem = new FeedItem();
                     feedItem.Title = item.Title.Text;
                     feedItem.PubDate = item.PublishedDate.DateTime;
-                    feedItem.Author = item.Authors[0].Name.ToString();
-                    if (feed.SourceFormat == SyndicationFormat.Atom10)
-                    {
-                        feedItem.Content = item.Content.Text;
-                    }
-                    else if (feed.SourceFormat == SyndicationFormat.Rss20)
-                    {
-                        feedItem.Content = item.Summary.Text;
-                    }
+                    feedItem.Author = (item.Authors != null && item.Authors.Any()) ? item.Authors[0].Name.ToString() : null;
+
+                    //feedItem.Content = item.Summary.Text;
+                    var firstOrDefault = item.ElementExtensions.FirstOrDefault(e => e.NodeName == "summary");
+                    var content = firstOrDefault != null ? firstOrDefault.NodeValue : string.Empty;
+                    content = content.Replace("<br>", Environment.NewLine);
+                    content = WebUtility.UrlDecode(content);
+                    feedItem.Content = content;
+
                     NewsItems.Add(feedItem);
                 }
             }
