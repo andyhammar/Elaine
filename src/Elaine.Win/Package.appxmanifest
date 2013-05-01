@@ -4,7 +4,7 @@
   <Properties>
     <DisplayName>Sydsvenskan Flip</DisplayName>
     <PublisherDisplayName>Andreas Hammar</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Assets\logo-50.png</Logo>
   </Properties>
   <Prerequisites>
     <OSMinVersion>6.2.1</OSMinVersion>
@@ -15,9 +15,9 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Elaine.Win.App">
-      <VisualElements DisplayName="Sydsvenskan Flip" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Läs senaste nytt från Sydsvenskan" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="Sydsvenskan Flip" Logo="Assets\logo-150.png" SmallLogo="Assets\logo-30.png" Description="Läs senaste nytt från Sydsvenskan" ForegroundText="dark" BackgroundColor="#FFFFFF">
         <DefaultTile ShowName="allLogos" />
-        <SplashScreen Image="Assets\SplashScreen.png" />
+        <SplashScreen Image="Assets\splash.png" BackgroundColor="#FFFFFF" />
         <InitialRotationPreference>
           <Rotation Preference="portrait" />
           <Rotation Preference="landscape" />
