@@ -5,9 +5,28 @@
     xmlns:local="using:Elaine.Win"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignInstance Type=local:MainPageVmDesign, IsDesignTimeCreatable=true}">
+	<Page.Resources>
+		<DataTemplate x:Key="DataTemplate1">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" Style="{StaticResource HeaderTextStyle}" Margin="40,40,0,0"/>
+				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Content}" VerticalAlignment="Top" Grid.Row="1" Style="{StaticResource GroupHeaderTextStyle}" Margin="40,40,0,0"/>
+				<TextBlock HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding PubDate}" VerticalAlignment="Bottom" Style="{StaticResource PageSubheaderTextStyle}" Margin="40,40,40,4" Grid.Column="1"/>
+				<Image Grid.Column="1" Source="{Binding ImageUri}" Grid.Row="1"/>
+			</Grid>
+		</DataTemplate>
+	</Page.Resources>
 
     <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-        <FlipView ItemsSource="{Binding NewsItems}"/>
+        <FlipView ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate1}"/>
     </Grid>
 </Page>
