@@ -68,6 +68,14 @@ namespace Elaine.Win
                     content = WebUtility.UrlDecode(content);
                     feedItem.Content = content;
 
+                    try
+                    {
+                        string imageUri = item.NodeValue.Split(new[] { "img src=\"" }, 2, StringSplitOptions.None)[1];
+                        imageUri = imageUri.Split('"')[0];
+                        feedItem.ImageUri = imageUri;
+                    }
+                    catch { }
+
                     NewsItems.Add(feedItem);
                 }
             }
@@ -89,5 +97,7 @@ namespace Elaine.Win
         public string Author { get; set; }
 
         public string Content { get; set; }
+
+        public string ImageUri { get; set; }
     }
 }
