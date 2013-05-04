@@ -1,31 +1,44 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Syndication;
 
 namespace Elaine.Win
 {
-    public class MainPageVm
+    public class MainPageVm : INotifyPropertyChanged
     {
         public MainPageVm()
         {
             NewsItems = new ObservableCollection<FeedItem>();
+            //NewsFeeds = new ObservableCollection<NewsFeed>();
+            //NewsFeeds.Add(new NewsFeed { Uri = "http://sydsvenskan.se/rss/senastenytt", Title = "Senaste nytt" });
+            //NewsFeeds.Add(new NewsFeed { Uri = "http://sydsvenskan.se/rss/sport", Title = "Sport" });
+            //NewsFeeds.Add(new NewsFeed { Uri = "http://sydsvenskan.se/rss/malmo", Title = "Malmö" });
+            //NewsFeeds.Add(new NewsFeed { Uri = "http://sydsvenskan.se/rss/lund", Title = "Lund" });
+            //NewsFeeds.Add(new NewsFeed { Uri = "http://sydsvenskan.se/rss/skane", Title = "Skåne" });
+            //NewsFeeds.Add(new NewsFeed { Uri = "http://sydsvenskan.se/rss/opinion", Title = "Opinion" });
         }
+
+        //public ObservableCollection<NewsFeed> NewsFeeds { get; set; }
+
         public ObservableCollection<FeedItem> NewsItems { get; set; }
 
-        public async Task Init()
+        public async Task Init(NewsFeed feed)
         {
-            await GetFeedAsync("http://sydsvenskan.se/rss/senastenytt");
+            await GetFeedAsync(feed.Uri);
         }
 
         private async Task GetFeedAsync(string feedUriString)
         {
             // using Windows.Web.Syndication;
-            SyndicationClient client = new SyndicationClient();
-            Uri feedUri = new Uri(feedUriString);
+            var client = new SyndicationClient();
+            var feedUri = new Uri(feedUriString);
 
             try
             {
@@ -42,6 +55,9 @@ namespace Elaine.Win
                     var content = firstOrDefault != null ? firstOrDefault.NodeValue : string.Empty;
                     content = content.Replace("<br>", Environment.NewLine);
                     content = WebUtility.UrlDecode(content);
+
+                    content = content.Replace("&#160;", " ");
+
                     feedItem.Content = content;
 
                     try
@@ -62,5 +78,7 @@ namespace Elaine.Win
                 Debug.WriteLine(ex);
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

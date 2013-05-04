@@ -16,6 +16,20 @@
         <x:String x:Key="AppName">My Application</x:String>
     </Page.Resources>
 
+    <common:LayoutAwarePage.TopAppBar>
+        <AppBar>
+            <Grid>
+                <ListView ItemsSource="{Binding NewsFeeds}" SelectionChanged="Selector_OnSelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </AppBar>
+    </common:LayoutAwarePage.TopAppBar>
+
     <!--
         This grid acts as a root panel for the page that defines two rows:
         * Row 0 contains the back button and page title
