@@ -40,8 +40,8 @@ namespace Elaine.Win
         /// property is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var feed = _vm.NewsFeeds.First();
-            await TryInit(feed);
+            //var feed = _vm.NewsFeeds.First();
+            await TryInit(new NewsFeed{Uri = "http://www.sydsvenskan.se/rss.xml"});
         }
 
         private async Task TryInit(NewsFeed feed)
@@ -52,6 +52,7 @@ namespace Elaine.Win
                 await _vm.Init(feed);
                 couldInit = _vm.NewsItems.Any();
                 busyBorder.Visibility = Visibility.Collapsed;
+                AnimateSwipeText.Begin();
             }
             catch (Exception exc)
             {
@@ -68,13 +69,13 @@ namespace Elaine.Win
             }
         }
 
-        private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            var item = e.ClickedItem;
-            if (item == null) return;
+        //private async void ListView_ItemClick(object sender, ItemClickEventArgs e)
+        //{
+        //    var item = e.ClickedItem;
+        //    if (item == null) return;
 
-            await TryInit(item as NewsFeed);
-        }
+        //    await TryInit(item as NewsFeed);
+        //}
 
     }
 }

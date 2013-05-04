@@ -326,6 +326,32 @@
         		</Setter.Value>
         	</Setter>
         </Style>
+        <Storyboard x:Name="AnimateSwipeText">
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="textBlock">
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="0.05"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.689" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CubicEase/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        		<EasingDoubleKeyFrame KeyTime="0:0:4.711" Value="1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:5.3" Value="1">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CircleEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="textBlock">
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.1" Value="-1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:2.689" Value="-1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:4.711" Value="-1"/>
+        		<EasingDoubleKeyFrame KeyTime="0:0:5.3" Value="-3000">
+        			<EasingDoubleKeyFrame.EasingFunction>
+        				<CircleEase EasingMode="EaseIn"/>
+        			</EasingDoubleKeyFrame.EasingFunction>
+        		</EasingDoubleKeyFrame>
+        	</DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </common:LayoutAwarePage.Resources>
 
 
@@ -342,6 +368,12 @@
         <FlipView x:Name="flipView" ItemsSource="{Binding NewsItems}" ItemTemplate="{StaticResource DataTemplate1}">
         </FlipView>
         <Image x:Name="image" Source="Assets/Sydsvenskan_L.jpg" Visibility="Collapsed"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Right" TextWrapping="Wrap" Text="Svep åt sidan för fler artiklar" VerticalAlignment="Bottom" Style="{StaticResource PageSubheaderTextStyle}" Margin="100,40,100,40" Grid.Row="1" Opacity="0.05" RenderTransformOrigin="0.5,0.5">
+        	<TextBlock.RenderTransform>
+        		<CompositeTransform TranslateX="-1" TranslateY="6"/>
+        	</TextBlock.RenderTransform>
+        </TextBlock>
+
         <Border x:Name="busyBorder" BorderBrush="Black" BorderThickness="1" Background="White" d:IsHidden="True">
             <TextBlock TextWrapping="Wrap" Text="Hämtar nyheter..." Style="{StaticResource PageHeaderTextStyle}" Foreground="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
         </Border>
